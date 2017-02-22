@@ -1,0 +1,30 @@
+<div class="row">
+
+  <div class="col-sm-2">
+    <%= render 'announcements/navside' %>
+  </div>
+
+  <div class="col-sm-10">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-newspaper-o fa-fw"></i> 公告详情
+      </div>
+      <div class="panel-body" style="min-height: 450px">
+        <h2 class="text-center"><%= @announcement.title %></h2>
+        <p class="small text-muted text-center">
+          <i class="fa fa-clock-o"><%= @announcement.created_at.to_formatted_s(:db) %></i><%= @announcement.user.name %>
+        </p>
+        <p>
+          <%= raw @announcement.content %>
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+

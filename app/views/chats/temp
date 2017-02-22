@@ -1,0 +1,77 @@
+<div class="row">
+
+  <div class="col-sm-3" style="width: 240px;">
+    <%= render 'chats/navside' %>
+  </div>
+
+  <div class="col-sm-7">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-comments fa-fw"></i> Chat
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-chevron-down"></i>
+          </button>
+          <ul class="dropdown-menu slidedown">
+            <li>
+              <a href="#">
+                <i class="fa fa-info-circle fa-fw"></i> Info
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#">
+                <i class="fa fa-times fa-fw"></i> Sign Out
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <!--Widget body-->
+        <div id="demo-chat-body" class="collapse in">
+          <div class="nano has-scrollbar" style="height:380px">
+            <div class="nano-content pad-all" tabindex="0" style="right: -17px;">
+              <ul class="list-unstyled media-block">
+
+                <% @messages.each do |message| %>
+                    <% if message.user.id==current_user.id %>
+                        <%= sync partial: 'message_row_right', resource: message %>
+                    <% else %>
+                        <%= sync partial: 'message_row_left', resource: message %>
+                    <% end %>
+                <% end %>
+
+                <% if message.user.id!=current_user.id %>
+                    <%= sync_new partial: 'message_row_left', resource: Message.new, direction: :append %>
+                <% else %>
+                    <%= sync_new partial: 'message_row_right', resource: Message.new, direction: :append %>
+                <% end %>
+
+              </ul>
+            </div>
+            <div class="nano-pane">
+              <div class="nano-slider" style="height: 141px; transform: translate(0px, 0px);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <%= form_for @new_message, remote: true do |f| %>
+            <div class="input-group">
+              <%= f.text_field :body, class: "form-control input-sm", placeholder: "Type your message here..." %>
+              <span class="input-group-btn"> <%= f.submit "发送", class: "btn btn-warning btn-sm" %> </span>
+              <%= hidden_field_tag :chat_room, @chat.id %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var $cont = $('.nano-content');
+  $cont[0].scrollTop = $cont[0].scrollHeight;
+</script>

@@ -1,0 +1,12 @@
+<div class="list-group">
+  <%= link_to users_path, class: 'list-group-item' do %>
+      <i class="fa fa-user fa-fw"></i> 员工信息 <span class="badge"><%= User.all.length%></span>
+  <% end %>
+  <%= link_to salaries_path, class: 'list-group-item' do %>
+      <i class="fa fa-book fa-fw"></i> 薪酬管理
+  <% end %>
+  <%= link_to performances_path, class: 'list-group-item' do %>
+      <i class="fa fa-money fa-fw"></i> 绩效考核
+  <% end %>
+</div>
+

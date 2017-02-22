@@ -1,0 +1,75 @@
+<div class="row">
+
+  <div class="col-sm-2">
+    <%= render 'users/navside' %>
+  </div>
+
+  <div class="col-sm-10">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-users fa-fw"></i> 编辑薪酬信息
+
+      </div>
+      <div class="panel-body" style="min-height: 450px">
+
+
+        <%= form_for @salary, html: {class: 'form-horizontal'} do |f| %>
+            <%= render 'shared/error_messages', :object => @salary %>
+
+            <%= "当前编辑用户： #{@salary.user.name}"%><hr/>
+            <div class=" col-sm-12"><br/>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">基本工资</div>
+                <%= f.text_field :basic, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">基本奖金</div>
+                <%= f.text_field :bonus, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">医疗保险</div>
+                <%= f.text_field :insurence, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">考勤扣发</div>
+                <%= f.text_field :pulishment, class: 'form-control' %>
+              </div>
+            </div>
+
+
+
+            <br>
+            <div class="form-group">
+            <%= f.submit '更新', class: "btn btn-info btn-block" %>
+            </div>
+            <div class="form-group">
+            <%= link_to '取消', salaries_path, :class => "btn btn-default btn-block" %>
+            </div>
+            </div>
+
+        <% end %>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+
+
+
+

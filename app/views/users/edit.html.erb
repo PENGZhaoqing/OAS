@@ -1,0 +1,94 @@
+<div class="row">
+
+  <div class="col-sm-2">
+    <%= render 'users/navside' %>
+  </div>
+
+  <div class="col-sm-10">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-users fa-fw"></i> 编辑用户
+
+      </div>
+      <div class="panel-body" style="min-height: 450px">
+
+        <%= form_for @user, html: {role: 'form'} do |f| %>
+            <%= render 'shared/error_messages', :object => @user %>
+            <div class=" col-sm-12"><br/><br/>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
+                  <%= f.text_field :name, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</div>
+                  <%= f.text_field :sex, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <div class="input-group">
+                  <div class="input-group-addon">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</div>
+                  <%= f.text_field :email, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</div>
+                  <%= f.text_field :password_digest, class: 'form-control' %>
+                </div>
+              </div>
+
+
+
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">所属部门</div>
+                  <%= f.text_field :department, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">联系方式</div>
+                  <%= f.text_field :phonenumber, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</div>
+                  <%= f.text_field :status, class: 'form-control' %>
+                </div>
+              </div>
+
+
+              <br>
+              <div class="form-group">
+              <%= f.submit '更新', class: "btn btn-info btn-block" %>
+              </div>
+              <div class="form-group">
+              <%= link_to '取消', users_path, :class => "btn btn-default btn-block" %>
+              </div>
+              <br>
+            </div>
+        <% end %>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+
+
+

@@ -1,0 +1,163 @@
+<% performance=@user.performance
+   salary=@user.salary
+%>
+
+<div class="row">
+  <% if current_user.role==5 %>
+      <div class="col-sm-2">
+        <%= render 'users/navside' %>
+      </div>
+  <% end %>
+
+  <div class="col-sm-1<%= current_user.role==5 ? "0" : "2" %>">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-users fa-fw"></i> <%= @user.name %> 的个人信息
+        <div class="pull-right"><%= link_to "返回", users_path(page: params[:page]), class: 'btn-sm btn-primary' %></div>
+      </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-users fa-fw"></i> 基本信息
+          </div>
+          <div class="panel-body" id="profile-1">
+            <br/>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">职工编号</div>
+                <div class="form-control"><%= @user.id %></div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
+                <div class="form-control"><%= @user.name %></div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</div>
+                <div class="form-control"><%= @user.sex %></div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</div>
+                <div class="form-control"><%= @user.phonenumber %></div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</div>
+                <div class="form-control"><%= @user.email %></div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;门</div>
+                <div class="form-control"><%= @user.department %></div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</div>
+                <div class="form-control"><%= @user.status %></div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">权&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;限</div>
+                <div class="form-control"><%= @user.role %></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-users fa-fw"></i> 薪酬情况
+          </div>
+          <div class="panel-body" id="profile-2">
+            <br/>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">基本工资</div>
+                <div class="form-control"><%= salary.basic %>元</div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">基本奖金</div>
+                <div class="form-control"><%= salary.bonus %>元</div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">医疗保险</div>
+                <div class="form-control"><%= salary.insurence %>元</div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">考核扣发</div>
+                <div class="form-control"><%= salary.pulishment %>元</div>
+              </div>
+              <br/>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-users fa-fw"></i> 考核状况
+          </div>
+          <div class="panel-body" id="profile-3">
+
+            <br/>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">迟到次数</div>
+                <div class="form-control"><%= performance.arriving_late %></div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">请假次数</div>
+                <div class="form-control"><%= performance.leaving %></div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">培训成绩</div>
+                <div class="form-control"><%= performance.training_score %></div>
+              </div>
+              <br/>
+              <div class="input-group">
+                <div class="input-group-addon">综合评价</div>
+                <div class="form-control"><%= performance.evaluation %></div>
+              </div>
+              <br/>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    $(function () {
+        var obj1 = $("#profile-1");
+        var obj2 = $("#profile-2");
+        var obj3 = $("#profile-3");
+        var h1 = obj1.height();
+        var h2 = obj2.height();
+        var h3 = obj3.height();
+        if (h1 < h2) h1 = h2;
+        if (h1 < h3) h1 = h3;
+        obj1.height(h1);
+        obj2.height(h1);
+        obj3.height(h1);
+    });
+</script>
+

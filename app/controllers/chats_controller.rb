@@ -1,9 +1,9 @@
 class ChatsController < ApplicationController
   include SessionsHelper
   respond_to :js, :html
+  before_action :logged_in
 
   def index
-
   end
 
   def new
@@ -20,7 +20,7 @@ class ChatsController < ApplicationController
     @chat = Chat.new
     @chat.users<<user
     @chat.users<<current_user
-    @chat.name="与#{user.name}的聊天"
+    @chat.name="#{user.name}-#{current_user.name}"
 
     if @chat.save
       redirect_to chat_path(@chat)
@@ -49,6 +49,14 @@ class ChatsController < ApplicationController
       @messages << msg
     end
     @new_message = current_user.messages.build
+  end
+
+  private
+
+  def logged_in
+    unless logged_in?
+      redirect_to root_url, flash: {danger: '请登陆'}
+    end
   end
 
 end

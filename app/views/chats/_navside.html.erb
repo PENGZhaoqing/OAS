@@ -18,7 +18,7 @@
                   </a>
 
                   <ul class="dropdown-menu">
-                    <li><%= link_to '发起聊天', shortcut_chat_path(user) %></li>
+                    <li><%= link_to '发起聊天', chat_path(user) %></li>
                     <li><%= link_to '用户详情', user_path(user) %></li>
                   </ul>
                 </div>
@@ -29,14 +29,13 @@
 
       <div class="tab-pane fade" id="tab2default">
         <ul class="list-group">
-          <% Chat.all.each do |chatroom| %>
+          <% current_user.chats.each do |chatroom| %>
               <li class="list-unstyled" style="margin-bottom: 10px;margin-top: 10px;">
                 <%= link_to chat_path(chatroom) do %>
                     <%= image_tag "foro.png", class: "img-sm", style: "margin-right:5px;" %> <%= chatroom.name %>
                 <% end %>
               </li>
           <% end %>
-
         </ul>
       </div>
 

@@ -16,11 +16,17 @@ class MessagesController < ApplicationController
   end
 
   def destroy
+    @message = Message.find(params[:id])
+    chat=Chat.find_by_id(params[:chat_room])
     @message.destroy
-    respond_to do |format|
-      format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    sync_destroy @message
+    redirect_to chat_path(chat)
+  end
+
+  def destroyall
+    chat=Chat.find_by_id(params[:chat_room])
+    chat.messages.delete_all
+    redirect_to chat_path(chat)
   end
 
   private

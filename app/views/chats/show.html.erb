@@ -14,15 +14,15 @@
           </button>
           <ul class="dropdown-menu slidedown">
             <li>
-              <a href="#">
-                <i class="fa fa-info-circle fa-fw"></i> Info
-              </a>
+              <%= link_to destroyall_messages_path(chat_room: @chat.id), method: :delete do %>
+                  <i class="fa fa-info-circle fa-fw"></i> 清空历史记录
+              <% end %>
             </li>
             <li class="divider"></li>
             <li>
-              <a href="#">
-                <i class="fa fa-times fa-fw"></i> Sign Out
-              </a>
+              <%= link_to chat_path(@chat), method: :delete do %>
+                  <i class="fa fa-times fa-fw"></i> 删除聊天
+              <% end %>
             </li>
           </ul>
         </div>
@@ -36,7 +36,7 @@
               <ul class="list-unstyled media-block">
 
                 <%= sync partial: 'message_row', collection: @messages %>
-                <%= sync_new partial: 'message_row', resource: Message.new %>
+                <%= sync_new partial: 'message_row_new', resource: Message.new %>
 
               </ul>
             </div>
@@ -59,12 +59,52 @@
     </div>
   </div>
 
-  <div class="col-sm-2">
+  <div class="col-sm-2" style="width: 260px;">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <i class="fa fa-comments fa-fw"></i> Chat
-        <div class="panel-body">
+        <i class="fa fa-comments fa-fw"></i> 房间信息
+      </div>
+      <div class="panel-body">
+
+        <table class="table">
+          <tbody>
+          <tr>
+            <td>房间名:</td>
+            <td><%= @chat.name %></td>
+          </tr>
+          <tr>
+            <td>当前用户:</td>
+            <td>
+              <% @chat.users.each do |user| %>
+                  <%= user.name %>
+              <% end %>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <hr>
+        <button data-toggle="collapse" data-target="#add-user" class="btn btn-info btn-block">加入用户</button>
+
+        <div id="add-user" class="collapse">
+          <div class="well">
+            <strong style="margin:5px;">选择加入聊天的用户：</strong>
+
+            <select class="js-example-basic-multiple" multiple="multiple" style="width: 100%">
+              <option value="AL">Alabama</option>
+              ...
+              <option value="WY">Wyodfadming</option>
+              <option value="WY">daf</option>
+              <option value="WY">dsdf</option>
+              <option value="WY">fda</option>
+              <option value="WY">dad</option>
+
+            </select>
+          </div>
+
+
+
         </div>
+
       </div>
     </div>
   </div>
@@ -72,6 +112,11 @@
 </div>
 
 <script>
-  var $cont = $('.nano-content');
-  $cont[0].scrollTop = $cont[0].scrollHeight;
+    var $cont = $('.nano-content');
+    $cont[0].scrollTop = $cont[0].scrollHeight;
+</script>
+
+<script type="text/javascript">
+    $(".js-example-basic-multiple").select2();
+
 </script>

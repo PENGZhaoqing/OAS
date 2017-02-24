@@ -16,6 +16,5 @@
 //= require bootstrap.min
 //= require bootstrap.file-input
 //= require sync
-//= require select2.min.js
-//= require toastr.min.js
-
+//= require select2.min
+//= require toastr.min

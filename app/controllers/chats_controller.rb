@@ -4,6 +4,7 @@ class ChatsController < ApplicationController
   respond_to :js, :html
   before_action :logged_in
   before_action :set_chat, except: [:index, :new, :create]
+  before_action :correct_user, only: :show
 
   def index
     @all_users=User.all
@@ -13,13 +14,13 @@ class ChatsController < ApplicationController
     params[:users].each do |id|
       @chat.users<<User.find_by_id(id)
     end
-    redirect_to chat_path(@chat), flash: {:success => "用户已成功拉入群聊"}
+    redirect_to chat_path(@chat), flash: {:info => "用户已成功拉入群聊"}
   end
 
   def delete_user
     user=User.find_by_id(params[:user_id])
     @chat.users.delete(user)
-    redirect_to chat_path(@chat), flash: {:success => "#{user.name}已成功移除群聊"}
+    redirect_to chat_path(@chat), flash: {:warning => "#{user.name}已成功退出群聊"}
   end
 
   def create
@@ -75,7 +76,6 @@ class ChatsController < ApplicationController
 
   private
 
-
   def chat_params
     params.require(:chat).permit(:name, :description)
   end
@@ -91,6 +91,13 @@ class ChatsController < ApplicationController
     if @chat.nil?
       redirect_to chats_path, flash: {:warning => "没有找到此次聊天的信息"}
     end
+  end
+
+  def correct_user
+     if @chat.users.include?(current_user)
+     else
+        redirect_to chats_path, flash: {warning: '您没有权限无法进入此聊天室'}
+     end
   end
 
 end

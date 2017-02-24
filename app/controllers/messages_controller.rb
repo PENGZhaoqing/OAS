@@ -5,12 +5,12 @@ class MessagesController < ApplicationController
   def create
     @message = current_user.messages.build(message_params)
     chat=Chat.find_by_id(params[:chat_room])
-    redirect_to chats_path, flash: {:warning => "此聊天不存在"} and return if chat.nil?
+    redirect_to chats_path, flash: {:warning => '此聊天不存在'} and return if chat.nil?
     @message.chat=chat
     if @message.save
       sync_new @message
     else
-      redirect_to chat_path(chat), flash: {:warning => "消息发送失败"} and return
+      redirect_to chat_path(chat), flash: {:warning => '消息发送失败'} and return
     end
     redirect_to chat_path(chat)
   end
@@ -26,7 +26,7 @@ class MessagesController < ApplicationController
   def destroyall
     chat=Chat.find_by_id(params[:chat_room])
     chat.messages.delete_all
-    redirect_to chat_path(chat)
+    redirect_to chat_path(chat), flash: {info: '聊天记录已清空'}
   end
 
   private

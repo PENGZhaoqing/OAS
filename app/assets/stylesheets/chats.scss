@@ -188,4 +188,23 @@
   background-color: #31708f;
 }
 
+// for tab
+
+#tab-panel-body {
+  min-height: 450px;
+  max-height: 450px;
+  overflow: scroll;
+  padding: 0px;
+}
+
+.list-group-item {
+  border-radius: 0px !important;
+  border: 0px;
+}
+
+#tab-contact-default {
+  border-radius: 0px;
+  border: 0px;
+}
+
 

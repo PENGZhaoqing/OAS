@@ -1,43 +1,47 @@
 <div class="panel with-nav-tabs panel-info">
   <div class="panel-heading">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#tab1default" data-toggle="tab">通讯录</a></li>
-      <li><a href="#tab2default" data-toggle="tab">聊天</a></li>
+      <li class=<%= contact_active %>><a href="#contact-tab" data-toggle="tab"><i class="fa fa-book"></i>通讯录</a></li>
+      <li class=<%= chat_active %>><a href="#chat-tab" data-toggle="tab"><i class="fa fa-weixin"></i>聊天</a></li>
     </ul>
   </div>
-  <div class="panel-body" style="min-height: 450px;max-height: 450px;overflow: scroll;">
+  <div class="panel-body" id="tab-panel-body">
     <div class="tab-content">
-      <div class="tab-pane fade in active" id="tab1default">
+      <div class="tab-pane fade in <%= contact_active %>" id="contact-tab">
         <ul class="list-group">
-          <% (User.all-[current_user]).each do |user| %>
-              <li class="list-unstyled">
-                <div class="dropdown">
-                  <a class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                    <%= image_tag "user-icon.png", class: "img-sm" %>
-                    <text class="text-muted"><%= user.name %></text>
-                  </a>
+          <% (@all_users-[current_user]).each do |user| %>
+              <li class="list-group-item" style="padding: 0px; margin-bottom: 0px;">
 
-                  <ul class="dropdown-menu" style="padding: 0px;">
-                    <%= form_for Chat.new, url: chats_path, method: :post do |f| %>
-                        <%= hidden_field_tag :users, [user.id] %>
-                        <%= f.submit "发起聊天", class: 'btn btn-success btn-block', style: "border-radius: 0;" %>
-                    <% end %>
-                    <%= link_to '用户详情', user_path(user), class: 'btn btn-info btn-block', role: "button", style: "border-radius: 0" %>
-                  </ul>
+                <button class="btn btn-default btn-block" data-toggle="collapse" data-target="#user-<%= user.id %>" id="tab-contact-default">
+                  <%= image_tag "user-icon.png", class: "img-sm" %>
+                  <div class="text-muted">
+                    <%= user.name %>
+                  </div>
+                </button>
+
+                <div id="user-<%= user.id %>" class="collapse">
+                  <%= form_for Chat.new, url: chats_path, method: :post do |f| %>
+                      <%= hidden_field_tag :users, [user.id] %>
+                      <%= button_tag(:class => "btn btn-success btn-block", style: "border-radius: 0;") do %>
+                          <i class="fa fa-angle-right"></i> 发起聊天
+                      <% end %>
+                  <% end %>
+                  <%= link_to user_path(user), class: 'btn btn-info btn-block', role: "button", style: "border-radius: 0" do %>
+                      <i class="fa fa-angle-right"></i> 用户详情
+                  <% end %>
                 </div>
               </li>
           <% end %>
         </ul>
       </div>
 
-      <div class="tab-pane fade" id="tab2default">
+
+      <div class="tab-pane fade in <%= chat_active %>" id="chat-tab">
         <ul class="list-group">
           <% current_user.chats.each do |chatroom| %>
-              <li class="list-unstyled" style="margin-bottom: 10px;margin-top: 10px;">
-                <%= link_to chat_path(chatroom) do %>
-                    <%= image_tag "foro.png", class: "img-sm", style: "margin-right:5px;" %> <%= chatroom.name %>
-                <% end %>
-              </li>
+              <%= link_to chat_path(chatroom), class: 'list-group-item' do %>
+                  <i class="fa fa-wechat fa-5"></i> <%= truncate(chatroom.name, length: 10) %>
+              <% end %>
           <% end %>
         </ul>
       </div>

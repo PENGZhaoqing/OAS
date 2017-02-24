@@ -44,9 +44,6 @@ class UsersController < ApplicationController
     @users=User.search(params).paginate(:page => params[:page], :per_page => 10)
   end
 
-  def index_ajax
-
-  end
 
   private
 

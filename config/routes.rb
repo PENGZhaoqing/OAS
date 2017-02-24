@@ -55,11 +55,7 @@ Rails.application.routes.draw do
   #   end
 
 
-  resources :users do
-    collection do
-
-    end
-  end
+  resources :users
   resources :salaries
   resources :performances
   resources :announcements
@@ -71,11 +67,11 @@ Rails.application.routes.draw do
     end
   end
 
-
   resources :chats do
     member do
-      get :shortcut
-      get :add_user
+      get :trans_auth
+      post :add_user
+      delete :delete_user
     end
   end
 

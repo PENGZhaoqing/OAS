@@ -1,18 +1,25 @@
 class ChatsController < ApplicationController
   include SessionsHelper
+  include ChatsHelper
   respond_to :js, :html
   before_action :logged_in
   before_action :set_chat, except: [:index, :new, :create]
 
   def index
+    @all_users=User.all
   end
-
-  def new
-  end
-
 
   def add_user
+    params[:users].each do |id|
+      @chat.users<<User.find_by_id(id)
+    end
+    redirect_to chat_path(@chat), flash: {:success => "用户已成功拉入群聊"}
+  end
 
+  def delete_user
+    user=User.find_by_id(params[:user_id])
+    @chat.users.delete(user)
+    redirect_to chat_path(@chat), flash: {:success => "#{user.name}已成功移除群聊"}
   end
 
   def create
@@ -20,13 +27,14 @@ class ChatsController < ApplicationController
 
     current_user.chats.each do |chat|
       if (chat.users-[user, current_user]).blank?
-        redirect_to chat_path(chat)
+        redirect_to chat_path(chat) and return
       end
     end
 
     @chat = Chat.new
     @chat.users<<user
     @chat.users<<current_user
+    @chat.admin_id=current_user.id
     @chat.name="#{user.name}-#{current_user.name}"
 
     if @chat.save
@@ -38,6 +46,17 @@ class ChatsController < ApplicationController
   end
 
   def update
+    if @chat.update_attributes(chat_params)
+      flash= {success: "修改成功"}
+    else
+      flash= {danger: "修改失败，请重试"}
+    end
+    redirect_to chat_path(@chat), flash: flash
+  end
+
+  def trans_auth
+    @chat.update_attribute(:admin_id, params[:admin_id])
+    redirect_to chat_path(@chat), flash: {success: '移交成功！'}
   end
 
   def destroy
@@ -51,9 +70,15 @@ class ChatsController < ApplicationController
       @messages << msg
     end
     @new_message = current_user.messages.build
+    @all_users=User.all
   end
 
   private
+
+
+  def chat_params
+    params.require(:chat).permit(:name, :description)
+  end
 
   def logged_in
     unless logged_in?

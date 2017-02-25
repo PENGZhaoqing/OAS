@@ -23,25 +23,27 @@
                 <% end %>
               </div>
             </li>
+            <% if current_user.role==5 %>
 
-            <li> <%= link_to "原材料管理", users_path %></li>
+              <li> <%= link_to "原材料管理", users_path %></li>
 
-            <li class="dropdown">
-              <a class="dropbtn">人事管理</a>
-              <div class="dropdown-content">
-                <%= link_to users_path do %><i class="fa fa-angle-right fa-fw"></i> 员工信息
-                <% end %>
-                <%= link_to users_path do %><i class="fa fa-angle-right fa-fw"></i> 绩效考核
-                <% end %>
-                <%= link_to salaries_path do %><i class="fa fa-angle-right fa-fw"></i> 薪酬管理
-                <% end %>
-              </div>
-            </li>
+              <li class="dropdown">
+                <a class="dropbtn">人事管理</a>
+                <div class="dropdown-content">
+                  <%= link_to users_path do %><i class="fa fa-angle-right fa-fw"></i> 员工信息
+                  <% end %>
+                  <%= link_to users_path do %><i class="fa fa-angle-right fa-fw"></i> 绩效考核
+                  <% end %>
+                  <%= link_to salaries_path do %><i class="fa fa-angle-right fa-fw"></i> 薪酬管理
+                  <% end %>
+                </div>
+              </li>
 
-            <li> <%= link_to "工程预决算", users_path %></li>
-            <li> <%= link_to "厂内生产管理", users_path %></li>
-            <li> <%= link_to "工地管理", users_path %></li>
-            <li> <%= link_to "后勤管理", users_path %></li>
+              <li> <%= link_to "工程预决算", users_path %></li>
+              <li> <%= link_to "厂内生产管理", users_path %></li>
+              <li> <%= link_to "工地管理", users_path %></li>
+              <li> <%= link_to "后勤管理", users_path %></li>
+            <% end %>
         <% end %>
 
       </ul>
@@ -63,7 +65,7 @@
             </li>
 
             <li>
-              <p class="navbar-text"><%= current_user.department %></p>
+              <p class="navbar-text"><%= current_user.department.name %></p>
             </li>
 
             <li>

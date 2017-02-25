@@ -11,17 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222093317) do
+ActiveRecord::Schema.define(version: 20170223090907) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "department_id"
     t.text     "content"
     t.string   "title"
     t.string   "kind"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
+  add_index "articles", ["department_id"], name: "index_articles_on_department_id"
   add_index "articles", ["title"], name: "index_articles_on_title"
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"
 
@@ -41,6 +43,15 @@ ActiveRecord::Schema.define(version: 20170222093317) do
 
   add_index "chats_users", ["chat_id"], name: "index_chats_users_on_chat_id"
   add_index "chats_users", ["user_id"], name: "index_chats_users_on_user_id"
+
+  create_table "departments", force: :cascade do |t|
+    t.string   "name"
+    t.string   "office_address"
+    t.string   "office_number"
+    t.integer  "number_of_people"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "materials", force: :cascade do |t|
     t.string   "file_file_name"
@@ -95,19 +106,20 @@ ActiveRecord::Schema.define(version: 20170222093317) do
   add_index "salaries", ["user_id"], name: "index_salaries_on_user_id"
 
   create_table "users", force: :cascade do |t|
+    t.integer  "department_id"
     t.string   "name"
     t.string   "email"
     t.integer  "role"
     t.string   "password_digest"
     t.string   "remember_digest"
     t.string   "sex"
-    t.string   "department"
     t.string   "phonenumber"
     t.string   "status"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
 
+  add_index "users", ["department_id"], name: "index_users_on_department_id"
   add_index "users", ["email"], name: "index_users_on_email"
   add_index "users", ["name"], name: "index_users_on_name"
 

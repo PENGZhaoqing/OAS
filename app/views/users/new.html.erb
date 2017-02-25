@@ -46,7 +46,14 @@
                     <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "再次输入密码" %>
                   </div>
 
-              </div><br/>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">所属部门</div>
+                  <%= f.select :department_id, options_for_select(Department.all.map{|depart| [depart.name,depart.id]}),class: 'form-control' %>
+                </div>
+              </div>
+              <br/>
 
               <div class="form-group">
                   <%= f.submit '注册', class: "btn btn-primary btn-block" %>

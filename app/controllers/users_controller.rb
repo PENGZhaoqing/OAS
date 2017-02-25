@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include SessionsHelper
+  include UsersHelper
   before_action :set_user, except: [:index,:new]
   before_action :logged_in, only: [:show]
   before_action :admin_logged_in, except: [:show]
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def create
-
+    @user=User.new(user_params)
     if @user.save
       @user.create_salary
       @user.create_performance
@@ -49,7 +50,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :sex, :department, :password,
+    params.require(:user).permit(:name, :email, :sex, :department_id, :password,
                                  :phonenumber, :status)
   end
 

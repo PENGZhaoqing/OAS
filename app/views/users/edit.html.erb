@@ -50,7 +50,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-addon">所属部门</div>
-                  <%= f.text_field :department, class: 'form-control' %>
+                  <%= f.select :department_id, options_for_select(Department.all.map{|depart| [depart.name,depart.id]}, [@user.department.name,@user.department.id]),class: 'form-control'%>
                 </div>
               </div>
 

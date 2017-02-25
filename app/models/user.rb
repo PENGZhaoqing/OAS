@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :articles
   has_many :materials
+  belongs_to :department
   has_one :salary, :dependent => :destroy
   has_one :performance, :dependent => :destroy
   has_and_belongs_to_many :chats

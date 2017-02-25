@@ -25,55 +25,113 @@ class UserGenerator
 
 end
 
-(0..20).each do |index|
+department=Department.create(
+    name: "无部门",
+    office_address: "无部门",
+    office_number: "无部门",
+    number_of_people: 0
+)
+department.users.create(
+    name: "无作者",
+    email: "none@test.com",
+    password: '123456',
+    role: 5,
+    sex: ['男', '女'].sample,
+    phonenumber: "无",
+    status: "无"
+)
+department.create_article(
+    title: "无",
+    content: "无部门概况",
+    kind: "部门概况",
+    user_id: User.first.id
+)
+
+department=Department.create(
+    name: "管理部门",
+    office_address: Faker::Address.city,
+    office_number: Faker::PhoneNumber.phone_number,
+    number_of_people: Faker::Number.between(50, 100)
+)
+department.create_article(
+    title: "管理部门",
+    content: "此部门相当厉害 是管理部门",
+    kind: "部门概况",
+    user_id: User.first.id
+)
+
+user=department.users.create(
+    name: "admin",
+    email: "admin@test.com",
+    password: '123456',
+    role: 5,
+    sex: ['男', '女'].sample,
+    phonenumber: Faker::PhoneNumber.phone_number,
+    status: Faker::Company.profession
+)
+user.create_salary(
+    basic: (Faker::Number.decimal(2))*100,
+    bonus: Faker::Number.decimal(2)*50,
+    insurence: Faker::Number.decimal(2)*10,
+    pulishment: Faker::Number.between(-30,100)
+)
+
+user.create_performance(
+    :arriving_late => Faker::Number.between(1, 10),
+    :leaving => Faker::Number.between(1, 10),
+    :training_score => Faker::Number.between(50, 100),
+    :evaluation => ['A', 'B', 'C', 'D'].sample
+)
 
 
-  if index==0
-    name='admin'
-    email='admin@test.com'
-    role=5
-    department='管理部门'
-  else
-    name=UserGenerator.name
-    email="user#{index}@test.com"
-    role=Faker::Number.between(1, 4)
-    department=Faker::Commerce.department
+
+(1..20).each do |index|
+  department=Department.create(
+      name: Faker::Commerce.department,
+      office_address: Faker::Address.city,
+      office_number: Faker::PhoneNumber.phone_number,
+      number_of_people: Faker::Number.between(50, 100)
+  )
+  department.create_article(
+      title: Faker::Lorem.sentence,
+      content: Faker::Lorem.paragraph(3),
+      kind: "部门概况",
+      user_id: User.first.id
+  )
+  (1..20).each do |index2|
+    user=department.users.create(
+        name: UserGenerator.name,
+        email: "user#{index}#{index2}@test.com",
+        password: '123456',
+        role: Faker::Number.between(1, 4),
+        sex: ['男', '女'].sample,
+        phonenumber: Faker::PhoneNumber.phone_number,
+        status: Faker::Company.profession
+    )
+    user.create_salary(
+        basic: (Faker::Number.decimal(2))*100,
+        bonus: Faker::Number.decimal(2)*50,
+        insurence: Faker::Number.decimal(2)*10,
+        pulishment: Faker::Number.between(-30,100)
+    )
+
+    user.create_performance(
+        :arriving_late => Faker::Number.between(1, 10),
+        :leaving => Faker::Number.between(1, 10),
+        :training_score => Faker::Number.between(50, 100),
+        :evaluation => ['A', 'B', 'C', 'D'].sample
+    )
   end
-
-  user=User.create(
-      name: name,
-      email: email,
-      password: '123456',
-      role: role,
-      sex: ['男', '女'].sample,
-      department: department,
-      phonenumber: Faker::PhoneNumber.phone_number,
-      status: Faker::Company.profession
-  )
-
-
-  user.create_salary(
-      basic: (Faker::Number.decimal(2))*100,
-      bonus: Faker::Number.decimal(2)*50,
-      insurence: Faker::Number.decimal(2)*10,
-      pulishment: Faker::Number.between(-30,100)
-  )
-
-  user.create_performance(
-      :arriving_late => Faker::Number.between(1, 10),
-      :leaving => Faker::Number.between(1, 10),
-      :training_score => Faker::Number.between(50, 100),
-      :evaluation => ['A', 'B', 'C', 'D'].sample
-  )
 end
 
 (1..20).each do
-  User.first.articles.create(
+  User.second.articles.create(
       title: Faker::Lorem.sentence,
       content: Faker::Lorem.paragraph(3),
       kind: ["通知公告","公司新闻"].sample
   )
 end
+
 
 
 

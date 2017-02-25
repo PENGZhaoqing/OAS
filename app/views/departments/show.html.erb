@@ -1,0 +1,57 @@
+<div class="row">
+
+  <div class="col-sm-2">
+    <%= render 'announcements/navside' %>
+  </div>
+
+  <div class="col-sm-10">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-newspaper-o fa-fw"></i> 部门详情
+        <div class="pull-right"><%= link_to "返回", departments_path(page: params[:page]), class: 'btn-sm btn-primary' %></div>
+      </div>
+
+      <div class="panel-body" style="min-height: 450px">
+        <div class="panel-body" id="profile-1">
+          <br/>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">部门名称</div>
+              <div class="form-control"><%= @department.name %></div>
+            </div>
+            <br/>
+            <div class="input-group">
+              <div class="input-group-addon">办公地址</div>
+              <div class="form-control"><%= @department.office_address %></div>
+            </div>
+            <br/>
+            <div class="input-group">
+              <div class="input-group-addon">办公电话</div>
+              <div class="form-control"><%= @department.office_number %></div>
+            </div>
+            <br/>
+            <div class="input-group">
+              <div class="input-group-addon">目前人数</div>
+              <div class="form-control"><%= @department.number_of_people %></div>
+            </div><br/>
+
+            <div class="input-group">
+              <div class="input-group-addon">部门概况</div>
+              <textarea class="form-control" rows="20" disabled style="background: white;cursor: default"><%=raw(@department.article.content)%></textarea>
+            </div>
+            <br/>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+

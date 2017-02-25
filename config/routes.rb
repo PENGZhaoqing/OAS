@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :messages
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -66,9 +65,17 @@ Rails.application.routes.draw do
   resources :companynews
   resources :vacation
 
+  resources :messages do
+    collection do
+      delete :destroyall
+    end
+  end
+
   resources :chats do
     member do
-      get :shortcut
+      patch :trans_auth
+      post :add_user
+      delete :delete_user
     end
   end
 

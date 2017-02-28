@@ -66,11 +66,7 @@ class ChatsController < ApplicationController
   end
 
   def show
-    @messages=[]
-    @chat.messages.each do |msg|
-      @messages << msg
-    end
-    @new_message = current_user.messages.build
+    @new_message = Message.new
     @all_users=User.all
   end
 
@@ -94,10 +90,10 @@ class ChatsController < ApplicationController
   end
 
   def correct_user
-     if @chat.users.include?(current_user)
-     else
-        redirect_to chats_path, flash: {warning: '您没有权限无法进入此聊天室'}
-     end
+    if @chat.users.include?(current_user)
+    else
+      redirect_to chats_path, flash: {warning: '您没有权限无法进入此聊天室'}
+    end
   end
 
 end

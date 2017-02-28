@@ -27,7 +27,6 @@ end
 
 (0..20).each do |index|
 
-
   if index==0
     name='admin'
     email='admin@test.com'

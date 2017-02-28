@@ -45,8 +45,8 @@
             <div class="nano-content pad-all" tabindex="0" style="right: -17px;">
               <ul class="list-unstyled media-block">
 
-                <%= sync partial: 'message_row', collection: @messages %>
-                <%= sync_new partial: 'message_row_new', resource: Message.new %>
+                <%= sync partial: 'message_row', collection: Message.by_chat(@chat), refetch: true %>
+                <%= sync_new partial: 'message_row', resource: Message.new, scope: @chat, refetch: true %>
 
               </ul>
             </div>

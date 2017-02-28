@@ -33,7 +33,7 @@ end
     role=5
     department='管理部门'
   else
-    name=UserGenerator.name
+    name=Faker::Name.name
     email="user#{index}@test.com"
     role=Faker::Number.between(1, 4)
     department=Faker::Commerce.department
@@ -55,7 +55,7 @@ end
       basic: (Faker::Number.decimal(2))*100,
       bonus: Faker::Number.decimal(2)*50,
       insurence: Faker::Number.decimal(2)*10,
-      pulishment: Faker::Number.between(-30,100)
+      pulishment: Faker::Number.between(-30, 100)
   )
 
   user.create_performance(
@@ -70,7 +70,7 @@ end
   User.first.articles.create(
       title: Faker::Lorem.sentence,
       content: Faker::Lorem.paragraph(3),
-      kind: ["通知公告","公司新闻"].sample
+      kind: ["通知公告", "公司新闻"].sample
   )
 end
 

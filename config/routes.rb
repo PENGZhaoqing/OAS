@@ -55,7 +55,11 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :users
+  resources :users do
+    collection do
+      get :index_json
+    end
+  end
   resources :salaries
   resources :performances
   resources :announcements

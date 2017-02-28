@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include SessionsHelper
-  before_action :set_user, except: [:index, :new]
+  before_action :set_user, except: [:index, :new, :index_json]
   before_action :logged_in, only: [:show]
   before_action :admin_logged_in, except: [:show]
   before_action :correct_user, only: :show
@@ -42,10 +42,11 @@ class UsersController < ApplicationController
 
   def index
     @users=User.search(params).paginate(:page => params[:page], :per_page => 10)
-    respond_to do |format|
-      format.json { render @users }
-      format.html { render :index }
-    end
+  end
+
+  def index_json
+    @users=User.search_friends(params, current_user)
+    render json: @users.as_json
   end
 
   private
@@ -78,7 +79,7 @@ class UsersController < ApplicationController
   def set_user
     @user=User.find_by_id(params[:id])
     if @user.nil?
-      redirect_to root_patht, flash: {:danger => '没有找到此用户'}
+      redirect_to root_path, flash: {:danger => '没有找到此用户'}
     end
   end
 

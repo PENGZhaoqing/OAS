@@ -67,14 +67,21 @@ class User < ActiveRecord::Base
 
 
   def self.search(params)
-    users=User.where("users.name LIKE ?", "%#{params[:query]}%")
-    return users
+    User.where("users.name LIKE ?", "%#{params[:query]}%")
+  end
+
+  def self.search_friends(params, current_user)
+    User.all_except(current_user).all_except(current_user.friends).where("users.name LIKE ?", "%#{params[:query]}%")
   end
 
   private
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def self.all_except(user)
+    where.not(id: user)
   end
 
 end

@@ -42,8 +42,11 @@ class UsersController < ApplicationController
 
   def index
     @users=User.search(params).paginate(:page => params[:page], :per_page => 10)
+    respond_to do |format|
+      format.json { render @users }
+      format.html { render :index }
+    end
   end
-
 
   private
 

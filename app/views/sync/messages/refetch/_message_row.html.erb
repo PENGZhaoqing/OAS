@@ -20,17 +20,3 @@
     $cont[0].scrollTop = $cont[0].scrollHeight;
 </script>
 
-<% if params[:id].to_i!=message.chat.id %>
-    <script>
-        var number_body = $("#chatroom-<%= message.chat.id%>");
-        if (number_body.text() == "") {
-            number_body.text(1);
-        } else {
-            number_body.text(parseInt(number_body.text()) + 1);
-        }
-    </script>
-<% end %>
-
-<%#= link_to message_path(message, chat_room: @chat.id), method: :delete do %>
-<!--<i class="fa fa-close fa-fw" style="color: grey;"></i>-->
-<%# end %>

@@ -6,8 +6,12 @@
     <%= link_to announcements_path, class: "list-group-item" do %>
         <i class="fa fa-angle-right fa-fw"></i> 通知公告
     <% end %>
-    <a href="#" class="list-group-item"><i class="fa fa-angle-right fa-fw"></i> 部门概况</a>
-    <a href="#" class="list-group-item"><i class="fa fa-angle-right fa-fw"></i> 公司新闻</a>
+    <%= link_to departments_path, class: "list-group-item" do %>
+        <i class="fa fa-angle-right fa-fw"></i> 部门概况
+    <% end %>
+    <%= link_to companynews_index_path, class: "list-group-item" do %>
+        <i class="fa fa-angle-right fa-fw"></i> 公司新闻
+    <% end %>
     <%= link_to materials_path, class: "list-group-item" do %>
         <i class="fa fa-angle-right fa-fw"></i> 资料下载
     <% end %>
@@ -24,8 +28,10 @@
   <div class="list-group">
     <a href="#" class="list-group-item"><i class="fa fa-angle-right fa-fw"></i> 合同管理</a>
     <a href="#" class="list-group-item"><i class="fa fa-angle-right fa-fw"></i> 社会保险</a>
-    <a href="#" class="list-group-item"><i class="fa fa-angle-right fa-fw"></i> 公时休假</a>
-    <a href="#" class="list-group-item"><i class="fa fa-angle-right fa-fw"></i> 审批结果</a>
+    <%= link_to vacations_path, class: "list-group-item" do %>
+        <i class="fa fa-angle-right fa-fw"></i> 公时休假
+    <% end %>
+    <a href="#" class="list-group-item"><i class="fa fa-angle-right fa-fw"></i> 报销管理</a>
   </div>
 
 </div>

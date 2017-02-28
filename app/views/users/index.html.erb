@@ -37,12 +37,12 @@
           </tr>
           </thead>
           <tbody>
-          <% @users.each do |user| %>
+          <% available_user.each do |user| %>
               <tr>
                 <td><%= user.id %></td>
                 <td><%= link_to "#{user.name}",user_path(id:user.id,page: params[:page]) %></td>
                 <td><%= user.sex %></td>
-                <td><%= user.department %>
+                <td><%= user.department.name %>
                 <td><%= user.phonenumber %></td>
                 <td><%= user.status %></td>
 

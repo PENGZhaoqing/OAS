@@ -13,7 +13,9 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <i class="fa fa-users fa-fw"></i> <%= @user.name %> 的个人信息
-        <div class="pull-right"><%= link_to "返回", users_path(page: params[:page]), class: 'btn-sm btn-primary' %></div>
+        <% if current_user.role==5 %>
+            <div class="pull-right"><%= link_to "返回", users_path(page: params[:page]), class: 'btn-sm btn-primary' %></div>
+        <% end %>
       </div>
     </div>
 
@@ -55,7 +57,7 @@
               <br/>
               <div class="input-group">
                 <div class="input-group-addon">部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;门</div>
-                <div class="form-control"><%= @user.department %></div>
+                <div class="form-control"><%= @user.department.name  %></div>
               </div>
               <br/>
               <div class="input-group">

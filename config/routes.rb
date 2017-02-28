@@ -64,6 +64,10 @@ Rails.application.routes.draw do
   resources :performances
   resources :announcements
   resources :materials
+  resources :articles
+  resources :departments
+  resources :companynews
+  resources :vacation
 
   resources :messages do
     collection do

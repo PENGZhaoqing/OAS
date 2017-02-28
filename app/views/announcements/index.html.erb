@@ -21,7 +21,9 @@
                 <i class="fa fa-refresh"></i></span> 查找
             <% end %>
 
-            <%= link_to "新增公告", new_announcement_path, class: 'pull-right btn btn-success' %>
+            <% if current_user.role==5 %>
+              <%= link_to "新增公告", new_announcement_path, class: 'pull-right btn btn-success' %>
+            <% end %>
 
         <% end %>
 
@@ -40,7 +42,7 @@
           <tbody>
           <% @announcements.each do |announcement| %>
               <tr>
-                <td><%= link_to "#{announcement.title}" ,announcement_path(announcement)%></td>
+                <td><%= link_to raw("#{announcement.title}") ,announcement_path(id:announcement.id,page: params[:page])%></td>
                 <td><%= announcement.user.name %></td>
                 <td><%= announcement.created_at.to_formatted_s(:db) %></td>
 

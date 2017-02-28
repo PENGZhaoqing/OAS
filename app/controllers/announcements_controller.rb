@@ -3,10 +3,14 @@ class AnnouncementsController < ApplicationController
   before_action :logged_in
 
   def index
+    params[:kind]="通知公告"
     @announcements=Article.search(params).paginate(:page => params[:page], :per_page => 10)
   end
 
   def edit
+    @announcement= Article.find_by_id(params[:id])
+    @announcement[:title]=@announcement[:title].gsub('&nbsp;',' ')
+    @announcement[:content]=@announcement[:content].gsub('<br/>',"\n").gsub('&nbsp;',' ')
   end
 
   def show
@@ -14,7 +18,13 @@ class AnnouncementsController < ApplicationController
   end
 
   def update
-
+    @announcement= Article.find_by_id(params[:id])
+    if @announcement.update_attributes(announcement_params)
+      flash={:info => "更新成功"}
+    else
+      flash={:warning => "更新失败"}
+    end
+    redirect_to announcements_path, flash: flash
   end
 
   def destroy
@@ -46,10 +56,11 @@ class AnnouncementsController < ApplicationController
   end
 
   def announcement_params
-    params[:announcement][:kind]="通知公告"
-    params[:announcement][:title]=params[:announcement][:title].gsub(/\s/,"&nbsp;")
-    params[:announcement][:content]=params[:announcement][:content].gsub(/\r/,"<br/>").gsub(/\s/,"&nbsp;")
-    params.require(:announcement).permit(:title,:content)
+    params[:article][:kind]="通知公告"
+    params[:article][:title]=params[:article][:title].gsub(/\s/,"&nbsp;")
+    params[:article][:content]=params[:article][:content].gsub(/\r/,"<br/>").gsub(/\s/,"&nbsp;")
+    params.require(:article).permit(:title,:content,:kind)
   end
+
 
 end

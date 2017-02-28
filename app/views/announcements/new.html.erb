@@ -12,7 +12,7 @@
 
       </div>
       <div class="panel-body" style="min-height: 450px">
-        <%= form_for @announcement, html: {class: 'form-horizontal', role: 'form'},controller:announcements do |f| %>
+        <%= form_for @announcement, url: announcements_path, html: {class: 'form-horizontal', role: 'form'} do |f| %>
             <%= render 'shared/error_messages', :object => @announcement %>
             <div class=" col-sm-12"><br/><br/>
 

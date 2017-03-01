@@ -53,6 +53,7 @@
   border-radius: 0;
   padding: 12px 20px;
 }
+
 .speech:before {
   content: "";
   display: block;
@@ -67,7 +68,7 @@
   margin: 15px 0 0 -6px;
 }
 
-.speech-right>.speech:before {
+.speech-right > .speech:before {
   left: auto;
   right: 0;
   border-top: 7px solid transparent;
@@ -76,37 +77,44 @@
   border-right: 0;
   margin: 15px -6px 0 0;
 }
+
 .speech .media-heading {
   font-size: 1.2em;
   color: #317787;
   display: block;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
   padding-bottom: 5px;
   font-weight: 300;
 }
+
 .speech-time {
   margin-top: 20px;
   margin-bottom: 0;
   font-size: .8em;
   font-weight: 300;
 }
+
 .media-block .media-right {
   float: right;
 }
+
 .speech-right {
   text-align: right;
 }
+
 .pad-hor {
   padding-left: 15px;
   padding-right: 15px;
 }
-.speech-right>.speech {
+
+.speech-right > .speech {
   background: #ffda87;
   color: #a07617;
   text-align: right;
 }
-.speech-right>.speech .media-heading {
+
+.speech-right > .speech .media-heading {
   color: #a07617;
 }
 
@@ -185,8 +193,7 @@
 // for tab
 
 #tab-panel-body {
-  min-height: 450px;
-  max-height: 450px;
+  height: 400px;
   overflow: scroll;
   padding: 0px;
 }
@@ -200,5 +207,28 @@
   border-radius: 0px;
   border: 0px;
 }
+
+//body {
+//  background-color: #C5DDEB;
+//  text-align: center;
+//}
+//
+//.chat-container {
+//  margin: 0 auto;
+//  text-align: left;
+//  width: 750px;
+//}
+//
+//.chat-navside {
+//  background-color: #4b4f51;
+//  width: 30%;
+//  float: left;
+//}
+//
+//.chat-widget {
+//  width: 70%;
+//  margin-left: 30%;
+//}
+
 
 

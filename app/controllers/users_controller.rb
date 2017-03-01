@@ -1,13 +1,8 @@
 class UsersController < ApplicationController
   include SessionsHelper
-<<<<<<< HEAD
   before_action :set_user, except: [:index, :new, :index_json]
-=======
-  include UsersHelper
-  before_action :set_user, except: [:index,:new]
->>>>>>> b87924eec57be7a4ed8a6cbef77e4cc9e995f1eb
   before_action :logged_in, only: [:show]
-  before_action :admin_logged_in, except: [:show]
+  before_action :admin_logged_in, except: [:show, :index_json]
   before_action :correct_user, only: :show
 
   def new
